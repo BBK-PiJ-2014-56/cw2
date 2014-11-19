@@ -18,9 +18,11 @@ public class Fraction {
 
     @Override
     public String toString() {
-    	if (getDenominator() = 1){
-    		return getNumerator()
+    	if (getDenominator() == 1){
+    		return "" + getNumerator();
+    	} else {
         return "" + getNumerator() + '/' + getDenominator();
+        }
     }
 
     public int getNumerator() {
@@ -101,11 +103,7 @@ public class Fraction {
     
         int num = this.getNumerator();
         int denom = this.getDenominator();
-		//System.out.println(num);
-        //System.out.println(denom);
 		denom = denom - 2 * denom;
-		//System.out.println(num);
-		//System.out.println(denom);
         return new Fraction(num, denom);
     }
 
