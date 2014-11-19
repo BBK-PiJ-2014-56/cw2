@@ -10,17 +10,17 @@ public class FractionCalculator {
 		str = input.nextLine();
 		String[] splitInput = str.split("\\s");
 		int noOfCalculations = (splitInput.length -1)/2;
-		System.out.println(noOfCalculations);
+		Fraction memory = new Fraction (0, 1);
 		for (int i = 0; i < noOfCalculations; i++) {
 			if (i == 0) {
-				calculation(splitInput);
-			} else {
 				String[] subArray = Arrays.copyOfRange(splitInput, 2*i, 2*i+3);
-				calculation(subArray);
-				//recursion...????
+				memory = calculation(subArray);
+			} else {
+				String[] subArray = {memory.toString(), splitInput[2*i-1], splitInput[2*i+2]};
+				memory = calculation(subArray);
 			}
 		}
-
+	System.out.println(memory);
 		
 	}
 	public static Fraction fractionMaker(String s) {
@@ -40,22 +40,18 @@ public class FractionCalculator {
 		for (int i = 0; i < splitInput.length; i++) {
 			if (splitInput[i].length() == 1 && splitInput[i].equals("/")) {
 				Fraction answer = fractionMaker(splitInput[i-1]).divide(fractionMaker(splitInput[i+1]));
-				System.out.println(answer);
 				return answer;
 			}
 			else if (splitInput[i].equals("*")) {
 				Fraction answer = fractionMaker(splitInput[i-1]).multiply(fractionMaker(splitInput[i+1]));
-				System.out.println(answer);
 				return answer;
 			}
 			else if (splitInput[i].equals("+")) {
 				Fraction answer = fractionMaker(splitInput[i-1]).add(fractionMaker(splitInput[i+1]));
-				System.out.println(answer);
 				return answer;
 			}
 			else if (splitInput[i].equals("-")) {
 				Fraction answer = fractionMaker(splitInput[i-1]).subtract(fractionMaker(splitInput[i+1]));
-				System.out.println(answer);
 				return answer;
 			}
 		}
@@ -63,4 +59,3 @@ public class FractionCalculator {
 	return f;
 	}
 }
-//Integer.parseInt();
