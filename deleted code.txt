@@ -1,0 +1,15 @@
+
+			// if length is even and equal to 2
+			/*if ((splitInput.length -1)%2 == 1 && splitInput.length == 2) {
+				answer = calculation(splitInput);
+			}
+			*/
+			
+			//System.out.println(splitInput[0].getClass());
+			
+			//if the function is missing an operator or has the wrong length
+			//if length of input is 1               and is not a fraction if (obj instanceof C) { splitInput[0].getClass() instanceof Fraction) { 
+			/*if (splitInput.length == 1){ //&& (!splitInput[0].equals("n") || !splitInput[1].equals("c") || !splitInput[1].equals("*") || !splitInput[1].equals("/"))) {
+				System.out.println("Error");
+				clear(answer);
+			} else { */

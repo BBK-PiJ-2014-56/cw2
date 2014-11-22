@@ -93,6 +93,9 @@ public class Fraction {
 
         int num = this.getNumerator();
         int denom = this.getDenominator();
+        if (num < 0) {
+        	num = num - 2 * num;
+        }
         if (denom < 0) {
         	denom = denom - 2 * denom;
         }
