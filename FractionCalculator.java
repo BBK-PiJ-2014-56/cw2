@@ -45,9 +45,11 @@ public class FractionCalculator {
 				} else if (splitInput[0].equals("c") || splitInput[0].equals("C") || splitInput[0].equals("clear")) {
 					clear(answer);
 					System.out.println(answer);
+				} else if (splitInput[0].equals("")) {
 				} else if (splitInput.length == 1) {
 					answer = calculation(splitInput);
 				}
+				
 				//Deals with functions that use an operator and a fraction
 				if (splitInput.length == 2){
 					answer = calculation(splitInput);
@@ -61,7 +63,7 @@ public class FractionCalculator {
 							Memory(answer);
 						} 
 						if (i > 0) {
-							String[] subArray = {memory.toString(), splitInput[2*i-1], splitInput[2*i+2]};
+							String[] subArray = {memory.toString(), splitInput[2*i+1], splitInput[2*i+2]};
 							answer = calculation(subArray);
 							Memory(answer);
 						}
@@ -110,6 +112,10 @@ public class FractionCalculator {
 	}
 	//Performs a calculation based on receiving either a fraction or a fraction and an operator or 2 fractions and an operator 
 	public static Fraction calculation(String[] splitInput) {
+		if (splitInput.length == 0) {
+			answer = memory;
+			return answer;
+		}
 		if (splitInput.length == 1) {
 			answer = fractionMaker(splitInput[0]);
 			return answer;
