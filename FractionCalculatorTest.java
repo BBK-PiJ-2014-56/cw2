@@ -11,7 +11,6 @@
 		
 		String addtest1 = "1/2 + 1/3"; 
 		Fraction addtestanswer1 = new Fraction(5,6);
-		//Fraction addtestanswer2 = new Fraction(5,7);
 		test(CalcTest.launchcalculator(addtest1), addtestanswer1,"error test 1");
 
 		//tests if calculator works with 2 operations
@@ -49,6 +48,18 @@
 		String cleartest = "c"; 
 		Fraction clearanswer = new Fraction(0,1);		
 		test(CalcTest.launchcalculator(cleartest), clearanswer,"error clear");
+
+		String subtracttest1 = "1/2 - 1/3"; 
+		Fraction subtracttestanswer1 = new Fraction(1,6);
+		test(CalcTest.launchcalculator(subtracttest1), subtracttestanswer1,"error subtract test");
+		
+		String multiplytest1 = "1/2 * 1/3"; 
+		Fraction multiplytestanswer1 = new Fraction(1,6);
+		test(CalcTest.launchcalculator(multiplytest1), multiplytestanswer1,"error multiply test");
+		
+		String dividetest1 = "1/2 / 1/3"; 
+		Fraction dividetestanswer1 = new Fraction(3,2);
+		test(CalcTest.launchcalculator(dividetest1), dividetestanswer1,"error divide test");
 
 	}
 	
