@@ -48,19 +48,27 @@
 		String cleartest = "c"; 
 		Fraction clearanswer = new Fraction(0,1);		
 		test(CalcTest.launchcalculator(cleartest), clearanswer,"error clear");
-
+		
+		//tests - fraction
 		String subtracttest1 = "1/2 - 1/3"; 
 		Fraction subtracttestanswer1 = new Fraction(1,6);
 		test(CalcTest.launchcalculator(subtracttest1), subtracttestanswer1,"error subtract test");
 		
+		//tests * fraction
 		String multiplytest1 = "1/2 * 1/3"; 
 		Fraction multiplytestanswer1 = new Fraction(1,6);
 		test(CalcTest.launchcalculator(multiplytest1), multiplytestanswer1,"error multiply test");
 		
+		//tests / fraction
 		String dividetest1 = "1/2 / 1/3"; 
 		Fraction dividetestanswer1 = new Fraction(3,2);
 		test(CalcTest.launchcalculator(dividetest1), dividetestanswer1,"error divide test");
-
+		
+		//tests evaluatemethod
+		Fraction evaluatetestfrac = new Fraction(1,2);
+		String evaluatetest1 = "/ 1/3"; 
+		Fraction evaluatetestanswer = new Fraction(3,2);
+		test(CalcTest.evaluate(evaluatetestfrac, evaluatetest1), evaluatetestanswer,"error evaluate test");
 	}
 	
     static void test(Fraction f1, Fraction f2, String msg){

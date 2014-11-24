@@ -10,11 +10,16 @@ public class FractionCalculator {
 	private static int noOfCalculations2 = 0;
     
     public static void main(String[] args) {
+    	FractionCalculator calculator = new FractionCalculator();
+    	calculator.startup();
+    }
+    public void startup() {
         launchBanner();
         newInput();
     }
+    
     //welcome banner
-    public static void launchBanner() {
+    public void launchBanner() {
         System.out.println("Welcome to James Thornton's fraction calculator");
         System.out.println("to use enter fractions using the / operator without a space eg. a/b");
         System.out.println("and place a space in between fractions and operators");
@@ -23,7 +28,7 @@ public class FractionCalculator {
         System.out.println(answer);
         }
     //Main calculator       
-    public static void newInput() {
+    public void newInput() {
         
             Scanner input = new Scanner(System.in);
             str = input.nextLine();
@@ -38,7 +43,7 @@ public class FractionCalculator {
                 System.exit(0);
             }
     }
-    public static Fraction launchcalculator(String str) {
+    public Fraction launchcalculator(String str) {
         try { 
     		//Splits the input into sections
             String[] splitInput = str.split("\\s");
@@ -115,7 +120,7 @@ public class FractionCalculator {
         return memory;
     }
     //returns a new fraction from an integer or a fraction
-    public static Fraction fractionMaker(String s) {
+    public Fraction fractionMaker(String s) {
         String[] splitFraction = s.split("/");
         if (splitFraction.length == 1) {
             int a = Integer.parseInt(splitFraction[0]);
@@ -129,7 +134,7 @@ public class FractionCalculator {
         return f;
     }
     //Performs a calculation based on receiving either a fraction or a fraction and an operator or 2 fractions and an operator 
-    public static Fraction calculation(String[] splitInput) {
+    public Fraction calculation(String[] splitInput) {
         if (splitInput.length == 0) {
             answer = memory;
             return answer;
@@ -182,14 +187,15 @@ public class FractionCalculator {
         return f;
     }
     //method to clear calculator and memory
-    public static void clear(Fraction a) {
+    public void clear(Fraction a) {
         a.setNumerator(0);
         a.setDenominator(1);
         memory.setNumerator(0);
         memory.setDenominator(1);
     }
-    public static void evaluate(Fraction fraction, String inputString) {
+    public Fraction evaluate(Fraction fraction, String inputString) {
     	String str = fraction.toString() + " " + inputString;
     	launchcalculator(str);
+    	return answer;
     }
 }
