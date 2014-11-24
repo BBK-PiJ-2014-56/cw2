@@ -6,14 +6,15 @@ public class FractionCalculator {
     private static String str = null;
     private static Fraction memory = new Fraction (0, 1);
     private static Fraction answer = new Fraction (0, 1);
-
+	private static int noOfCalculations = 0;
+	private static int noOfCalculations2 = 0;
     
     public static void main(String[] args) {
         launchBanner();
-        launchCalc();
+        newInput();
     }
     //welcome banner
-        public static void launchBanner() {
+    public static void launchBanner() {
         System.out.println("Welcome to James Thornton's fraction calculator");
         System.out.println("to use enter fractions using the / operator without a space eg. a/b");
         System.out.println("and place a space in between fractions and operators");
@@ -22,29 +23,38 @@ public class FractionCalculator {
         System.out.println(answer);
         }
     //Main calculator       
-    public static void launchCalc() {
-        try {
+    public static void newInput() {
+        
             Scanner input = new Scanner(System.in);
             str = input.nextLine();
-        
-            //Splits the input into sections
+        	if (!str.equals("q")) { //&& !splitInput[0].equals("Q") && !splitInput[0].equals("quit")) {
+        	    launchcalculator(str);
+				System.out.println(answer);
+        	    newInput();
+        	}
+        	//Exit banner
+            if (str.equals("q")) { // || splitInput[0].equals("Q") || splitInput[0].equals("quit")) {
+                System.out.println("Goodbye");
+                System.exit(0);
+            }
+    }
+    public static Fraction launchcalculator(String str) {
+        try { 
+    		//Splits the input into sections
             String[] splitInput = str.split("\\s");
         
             //Calculates the number of operations needed
-            int noOfCalculations = (splitInput.length -1)/2;
-            
-            //exit clause
-            if (!splitInput[0].equals("q") && !splitInput[0].equals("Q") && !splitInput[0].equals("quit")) {
+            noOfCalculations = (splitInput.length -1)/2;
+            noOfCalculations2 = (splitInput.length)/2;
                 // runs negate absolute and clear functions and deals with single fraction input
                 if (splitInput[0].equals("n") || splitInput[0].equals("N") || splitInput[0].equals("neg")) {
                     answer = answer.negate();
-                    System.out.println(answer);
+                    Memory(answer);
                 } else if (splitInput[0].equals("a") || splitInput[0].equals("A") || splitInput[0].equals("abs")) {
                     answer = answer.absValue();
-                    System.out.println(answer);
+                    Memory(answer);
                 } else if (splitInput[0].equals("c") || splitInput[0].equals("C") || splitInput[0].equals("clear")) {
                     clear(answer);
-                    System.out.println(answer);
                 } else if (splitInput[0].equals("")) {
                     Memory(answer);
                 } else if (splitInput.length == 1) {
@@ -52,47 +62,52 @@ public class FractionCalculator {
                     Memory(answer);
                 }
                 
-                //Deals with functions that use an operator and a fraction
-                if (splitInput.length == 2){
-                    answer = calculation(splitInput);
-                    Memory(answer);
-                } 
-                //Deals with functions that have more than one operator eg. 2 + 3 * 5
-                if (splitInput.length > 2){ 
-                    for (int i = 0; i < noOfCalculations; i++) {
-                        if (i == 0) {
-                            String[] subArray = Arrays.copyOfRange(splitInput, 2*i, 2*i+3);
-                            answer = calculation(subArray);
-                            Memory(answer);
-                        } 
-                        if (i > 0) {
-                            String[] subArray = {memory.toString(), splitInput[2*i+1], splitInput[2*i+2]};
-                            answer = calculation(subArray);
-                            Memory(answer);
-                        }
-                    }       
-                }       
-            System.out.println(answer);
-            launchCalc();
+                //Deals with equations that start with an operator
+                if ((splitInput.length%2 == 0)) {
+                	for (int i = 0; i < noOfCalculations2; i++) {
+                		String[] subArray = Arrays.copyOfRange(splitInput, 2*i, 2*i+2);
+						answer = calculation(subArray);
+						Memory(answer);
+            	    }
+               	}
+               	
+               	//Deals with functions that use an operator and a fraction
+               	else if (splitInput.length == 2){
+                	answer = calculation(splitInput);
+                	Memory(answer);
+            	} 
+            	//Deals with functions that have more than one operator eg. 2 + 3 * 5
+                else if (splitInput.length > 2){ 
+                	for (int i = 0; i < noOfCalculations; i++) {
+               	        if (i == 0) {
+            	            String[] subArray = Arrays.copyOfRange(splitInput, 2*i, 2*i+3);
+               	            answer = calculation(subArray);
+            	            Memory(answer);
+            	        } 
+               	        if (i > 0) {
+               	            String[] subArray = {memory.toString(), splitInput[2*i+1], splitInput[2*i+2]};
+               	            answer = calculation(subArray);
+               	            Memory(answer);
+               	        }
+               	    }       
+            	}                       
             }
-            //Exit banner
-            if (splitInput[0].equals("q") || splitInput[0].equals("Q") || splitInput[0].equals("quit")) {
-                System.out.println("Goodbye");
-            }
-        }
+            
+        
         //error catchers
         catch(NumberFormatException ex){ 
             System.out.println("Error");
             clear(answer);
             System.out.println(answer);
-            launchCalc();
+            newInput();
         }
         catch(ArrayIndexOutOfBoundsException ex){ 
             System.out.println("Error");
             clear(answer);
             System.out.println(answer);
-            launchCalc();
+            newInput();
         }
+    return answer;
     }
     //method to set memory
     public static Fraction Memory(Fraction mem) {
@@ -172,5 +187,9 @@ public class FractionCalculator {
         a.setDenominator(1);
         memory.setNumerator(0);
         memory.setDenominator(1);
+    }
+    public static void evaluate(Fraction fraction, String inputString) {
+    	String str = fraction.toString() + " " + inputString;
+    	launchcalculator(str);
     }
 }
